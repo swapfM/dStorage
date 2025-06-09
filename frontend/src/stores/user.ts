@@ -65,7 +65,7 @@ export const useUserStore = defineStore("user", {
           value: ethers.parseEther("0.1"),
         });
         await tx.wait();
-
+        await this.fetchBalance();
         alert("You are now registered as a provider!");
       } catch (err) {
         console.error("Contract call failed:", err);

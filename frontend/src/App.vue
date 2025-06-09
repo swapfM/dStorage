@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import WalletConnect from "./components/WalletConnect.vue";
+import Home from "./components/Home.vue";
 </script>
 
 <template>
-  <WalletConnect />
+  <Home />
 </template>
