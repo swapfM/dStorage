@@ -288,7 +288,3 @@ const stepTitle = computed(() => {
   }
 });
 </script>
-
-<style scoped>
-/* Additional styling if needed */
-</style>
