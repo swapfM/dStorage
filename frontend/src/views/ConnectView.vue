@@ -116,16 +116,29 @@ import { Card, CardContent } from "@/components/ui/card";
 const isConnecting = ref(false);
 const router = useRouter();
 
-const handleConnect = async (walletType) => {
-  isConnecting.value = true;
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  isConnecting.value = false;
+import { connectWallet } from "@/lib/walletConnect";
+import { useUserStore } from "@/stores/user";
 
-  const isNewUser = Math.random() > 0.5;
-  if (isNewUser) {
-    router.push("/account/create");
-  } else {
-    router.push("/dashboard/client");
+const userStore = useUserStore();
+
+const handleConnect = async (walletType) => {
+  try {
+    const { provider, signer, address, balance } = await connectWallet(
+      walletType
+    );
+
+    userStore.provider = provider;
+    userStore.walletAddress = address;
+    userStore.balance = balance;
+    userStore.isConnected = true;
+    userStore.signer = signer;
+    console.log(useUserStore);
+
+    // Don't assign signer directly to store (to avoid private field error)
+    //userStore.setSigner(signer); // Use an action that keeps it in a closure/global
+  } catch (err) {
+    alert(err.message || "Failed to connect wallet");
+    console.error(err);
   }
 };
 </script>
