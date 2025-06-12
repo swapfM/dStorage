@@ -91,7 +91,7 @@
                 >
                   <CardContent class="p-4">
                     <div class="flex items-center space-x-3">
-                      <RadioGroupItem value="client" id="client" />
+                      <RadioGroupItem value="consumer" id="client" />
                       <div class="flex-1">
                         <Label
                           for="client"
@@ -230,6 +230,7 @@ import {
 } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, ArrowRight, Check, User, Shield } from "lucide-vue-next";
+import { createNewAccount } from "@/lib/createAccount";
 
 const router = useRouter();
 const step = ref(1);
@@ -254,13 +255,7 @@ const handleUsernameCheck = () => {
 };
 
 const handleSubmit = () => {
-  setTimeout(() => {
-    if (formData.value.accountType === "provider") {
-      router.push("/dashboard/provider");
-    } else {
-      router.push("/dashboard/client");
-    }
-  }, 1000);
+  createNewAccount(formData.value);
 };
 
 const progress = computed(() => (step.value / 3) * 100);

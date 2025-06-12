@@ -118,6 +118,7 @@ const router = useRouter();
 
 import { connectWallet } from "@/lib/walletConnect";
 import { useUserStore } from "@/stores/user";
+import { getAccount } from "@/lib/getAccount";
 
 const userStore = useUserStore();
 
@@ -126,16 +127,13 @@ const handleConnect = async (walletType) => {
     const { provider, signer, address, balance } = await connectWallet(
       walletType
     );
+    const account = await getAccount(address);
 
     userStore.provider = provider;
     userStore.walletAddress = address;
     userStore.balance = balance;
     userStore.isConnected = true;
     userStore.signer = signer;
-    console.log(useUserStore);
-
-    // Don't assign signer directly to store (to avoid private field error)
-    //userStore.setSigner(signer); // Use an action that keeps it in a closure/global
   } catch (err) {
     alert(err.message || "Failed to connect wallet");
     console.error(err);
