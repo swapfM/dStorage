@@ -1,6 +1,7 @@
 // src/router/index.ts
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../components/Home.vue";
+import Home from "../views/HomeView.vue";
+import Connect from "../views/ConnectView.vue";
 
 const routes = [
   {
@@ -11,7 +12,7 @@ const routes = [
   {
     path: "/connect",
     name: "Connect",
-    component: Home,
+    component: Connect,
   },
 ];
 
