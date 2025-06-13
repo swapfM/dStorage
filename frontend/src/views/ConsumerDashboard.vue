@@ -150,14 +150,9 @@ const filteredProviders = computed(() => {
   >
     <Header />
     <div class="container mx-auto p-6">
-      <ProfileCard />
+      <ProfileCard :user-data="userData" />
     </div>
-    <!-- NOTE: Due to length, this is only the header and setup of the Vue file. Let me know if you want the full component UI ported. -->
   </div>
 </template>
 
-<style scoped>
-/* .btn {
-  @apply px-4 py-2 rounded-md font-medium transition-colors;
-} */
-</style>
+<style scoped></style>

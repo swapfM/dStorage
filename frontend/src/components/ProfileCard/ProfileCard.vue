@@ -9,33 +9,35 @@ const showUsername = ref(true);
 const showWallet = ref(true);
 const showBalance = ref(true);
 
-const userData = {
-  name: "Alice Client",
-  username: "aliceclient",
-  wallet: "0x9876543210fedcba9876543210fedcba98765432",
-  balance: "8.75",
-};
+const props = defineProps({
+  userData: {
+    type: Object,
+    required: true,
+  },
+});
 
 const displayName = computed(() => {
-  return showName.value ? userData.name : "****";
+  return showName.value ? props.userData.name : "****";
 });
 
 const displayUsername = computed(() => {
-  return showUsername.value ? userData.username : "****";
+  return showUsername.value ? props.userData.username : "****";
 });
 
 const displayWallet = computed(() => {
   return showWallet.value
-    ? `${userData.wallet.slice(0, 6)}...${userData.wallet.slice(-4)}`
+    ? `${props.userData.wallet.slice(0, 6)}...${props.userData.wallet.slice(
+        -4
+      )}`
     : "****";
 });
 
 const displayBalance = computed(() => {
-  return showBalance.value ? `${userData.balance} ETH` : "****";
+  return showBalance.value ? `${props.userData.balance} ETH` : "****";
 });
 
 const copyToClipboard = async () => {
-  await navigator.clipboard.writeText(userData.wallet);
+  await navigator.clipboard.writeText(props.userData.wallet);
 };
 </script>
 <template>

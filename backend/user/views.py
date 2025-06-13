@@ -37,6 +37,6 @@ class GetUserView(APIView):
                 }
             )
         except User.DoesNotExist:
-            return JsonResponse({"error": "User not found"}, status=404)
+            return Response("Not Found")
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
