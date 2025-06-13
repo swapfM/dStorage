@@ -5,15 +5,31 @@ export async function connectWallet(walletType: string) {
     throw new Error("Please install MetaMask.");
   }
 
-  const provider = new ethers.BrowserProvider(window.ethereum);
-  const signer = await provider.getSigner();
-  const address = await signer.getAddress();
-  const balance = await provider.getBalance(address);
+  try {
+    // Request account access
+    await window.ethereum.request({ method: "eth_requestAccounts" });
 
-  return {
-    provider,
-    signer,
-    address,
-    balance: ethers.formatEther(balance),
-  };
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    console.log("Provider created");
+
+    const signer = await provider.getSigner();
+    console.log("Signer obtained");
+
+    const address = await signer.getAddress();
+    console.log("Address:", address);
+
+    const balanceBigInt = await provider.getBalance(address);
+    console.log("Balance:", balanceBigInt);
+    const balance = ethers.formatEther(balanceBigInt);
+
+    return {
+      provider,
+      signer,
+      address,
+      balance,
+    };
+  } catch (error) {
+    console.error("Wallet connection or balance fetch failed:", error);
+    throw error;
+  }
 }

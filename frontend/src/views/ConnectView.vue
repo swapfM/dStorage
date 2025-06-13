@@ -127,7 +127,11 @@ const handleConnect = async (walletType) => {
     const { provider, signer, address, balance } = await connectWallet(
       walletType
     );
+
     const account = await getAccount(address);
+    console.log(account);
+    if (account) {
+    }
 
     userStore.provider = provider;
     userStore.walletAddress = address;
