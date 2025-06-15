@@ -132,10 +132,14 @@ const handleConnect = async (walletType) => {
     userStore.balance = balance;
     userStore.isConnected = true;
     userStore.signer = signer;
-    const account = await getAccount("address");
+    const account = await getAccount(address);
 
     if (account === "Not Found") {
       router.push({ name: "CreateAccount" });
+    } else {
+      userStore.name = account.name;
+      userStore.username = account.username;
+      router.push({ name: "ConsumerDashboard" });
     }
   } catch (err) {
     alert(err.message || "Failed to connect wallet");

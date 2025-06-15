@@ -31,8 +31,6 @@ export async function connectWallet(walletType: string) {
       signer,
       address,
       balance,
-      network: network.name,
-      chainId: network.chainId,
     };
   } catch (error) {
     console.error("Error details:", error);

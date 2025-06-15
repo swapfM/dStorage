@@ -7,13 +7,14 @@ export async function createNewAccount(formData: {
   maxStorage: string;
   storageUnit: string;
   storageLocation: string;
+  address: string;
 }) {
   try {
     const mappedData = {
       name: formData.name,
       username: formData.username,
       user_type: formData.accountType,
-      wallet_address: "0xehuwehrnrio34lnkj5kjlk1ihugyu",
+      wallet_address: formData.address,
     };
 
     axios.post(`${import.meta.env.VITE_API_BASE_URL}/user/create`, mappedData);

@@ -11,6 +11,8 @@ export const useUserStore = defineStore("user", {
     provider: null as ethers.BrowserProvider | null,
     signer: null as ethers.Signer | null,
     balance: "" as string,
+    name: "" as string,
+    username: "" as string,
   }),
 
   actions: {

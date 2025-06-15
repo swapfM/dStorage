@@ -231,8 +231,10 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, ArrowRight, Check, User, Shield } from "lucide-vue-next";
 import { createNewAccount } from "@/lib/createAccount";
+import { useUserStore } from "@/stores/user";
 
 const router = useRouter();
+const userStore = useUserStore();
 const step = ref(1);
 const formData = ref({
   name: "",
@@ -241,6 +243,7 @@ const formData = ref({
   maxStorage: "",
   storageUnit: "GB",
   storageLocation: "",
+  address: userStore.walletAddress,
 });
 const usernameAvailable = ref<boolean | null>(null);
 

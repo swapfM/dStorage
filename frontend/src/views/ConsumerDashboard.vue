@@ -116,12 +116,6 @@ const myFiles = [
   },
 ];
 
-const copyToClipboard = (text) => {
-  navigator.clipboard.writeText(text);
-};
-
-const formatWallet = (wallet) => `${wallet.slice(0, 6)}...${wallet.slice(-4)}`;
-
 const filteredProviders = computed(() => {
   return providers
     .filter(
