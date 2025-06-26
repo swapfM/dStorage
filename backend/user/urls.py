@@ -21,4 +21,9 @@ from .views import UserCreateView, GetUserView
 urlpatterns = [
     path("user/create", UserCreateView.as_view(), name="user-create"),
     path("user/get", GetUserView.as_view(), name="user-get"),
+    path(
+        "user/check-username/<str:username>",
+        GetUserView.as_view(),
+        name="user-get-by-username",
+    ),
 ]

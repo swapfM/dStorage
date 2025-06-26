@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import contractABI from "./StorageMarketplace.json"; // you'll export ABI from Hardhat
+import contractABI from "./StorageMarketplace.json";
 
 const contractAddress = import.meta.env.VITE_APP_DEPLOY_ADDRESS;
 

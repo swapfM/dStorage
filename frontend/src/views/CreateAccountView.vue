@@ -52,7 +52,6 @@
                 <Input
                   id="username"
                   v-model="formData.username"
-                  @input="handleUsernameCheck"
                   class="bg-white/10 border-white/20 text-white placeholder:text-gray-400 pr-10"
                   placeholder="Choose a username"
                 />
@@ -214,7 +213,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRouter } from "vue-router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -231,7 +230,9 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, ArrowRight, Check, User, Shield } from "lucide-vue-next";
 import { createNewAccount } from "@/lib/createAccount";
+import checkUsernameAvailable from "@/lib/usernameAvailable";
 import { useUserStore } from "@/stores/user";
+import { debounce } from "lodash";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -247,15 +248,22 @@ const formData = ref({
 });
 const usernameAvailable = ref<boolean | null>(null);
 
-const handleUsernameCheck = () => {
-  if (formData.value.username.length > 2) {
-    setTimeout(() => {
-      usernameAvailable.value = Math.random() > 0.3;
-    }, 500);
-  } else {
-    usernameAvailable.value = null;
-  }
+const checkUsernameAvailability = async (username: string) => {
+  console.log("Checking availability for:", username);
+  const isAvailable = await checkUsernameAvailable(username);
+  usernameAvailable.value = !isAvailable;
 };
+
+watch(
+  () => formData.value.username,
+  debounce((username: string) => {
+    if (username.trim()) {
+      checkUsernameAvailability(username.trim());
+    } else {
+      usernameAvailable.value = null;
+    }
+  }, 500)
+);
 
 const handleSubmit = () => {
   createNewAccount(formData.value);
