@@ -19,6 +19,7 @@ import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header/Header.vue";
 import ProfileCard from "@/components/ProfileCard/ProfileCard.vue";
+import FileUpload from "@/components/FileUpload/FileUpload.vue";
 import {
   Select,
   SelectContent,
@@ -146,8 +147,9 @@ const filteredProviders = computed(() => {
     class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900"
   >
     <Header />
-    <div class="container mx-auto p-6">
+    <div class="container mx-auto p-6 flex flex-col gap-4">
       <ProfileCard :user-data="userData" />
+      <FileUpload />
     </div>
   </div>
 </template>
