@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Switch } from "../ui/switch";
-import { User, Copy, CircleIcon } from "lucide-vue-next";
+import { User, Copy } from "lucide-vue-next";
+import { Button } from "../ui/button";
 import { ref, computed } from "vue";
 
 const showName = ref(true);
@@ -17,6 +18,7 @@ const props = defineProps({
 });
 
 const displayName = computed(() => {
+  console.log("User Data:", props.userData);
   return showName.value ? props.userData.name : "****";
 });
 
@@ -25,7 +27,7 @@ const displayUsername = computed(() => {
 });
 
 const displayWallet = computed(() => {
-  return showWallet.value
+  return !showWallet.value
     ? `${props.userData.wallet.slice(0, 6)}...${props.userData.wallet.slice(
         -4
       )}`

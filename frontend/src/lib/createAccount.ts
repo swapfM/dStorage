@@ -17,7 +17,11 @@ export async function createNewAccount(formData: {
       wallet_address: formData.address,
     };
 
-    axios.post(`${import.meta.env.VITE_API_BASE_URL}/user/create`, mappedData);
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/user/create`,
+      mappedData
+    );
+    return response.data;
   } catch (err) {
     console.log(err);
   }

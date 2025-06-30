@@ -265,8 +265,9 @@ watch(
   }, 500)
 );
 
-const handleSubmit = () => {
-  createNewAccount(formData.value);
+const handleSubmit = async () => {
+  const response = await createNewAccount(formData.value);
+  console.log(userStore);
 };
 
 const progress = computed(() => (step.value / 3) * 100);

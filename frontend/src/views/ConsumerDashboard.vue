@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useUserStore } from "@/stores/user";
 
 const showName = ref(true);
 const showUsername = ref(true);
@@ -35,11 +36,13 @@ const fileSize = ref("");
 const searchTerm = ref("");
 const sortBy = ref("reputation");
 
+const userStore = useUserStore();
+
 const userData = {
-  name: "Alice Client",
-  username: "aliceclient",
-  wallet: "0x9876543210fedcba9876543210fedcba98765432",
-  balance: "8.75",
+  name: userStore.name,
+  username: userStore.username,
+  wallet: userStore.walletAddress,
+  balance: userStore.balance,
 };
 
 const providers = [

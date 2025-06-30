@@ -23,6 +23,7 @@
     "lodash": "^4.17.21",
     "lucide-vue-next": "^0.514.0",
     "pinia": "^3.0.1",
+    "pinia-plugin-persistedstate": "^4.4.1",
     "reka-ui": "^2.3.1",
     "tailwind-merge": "^3.3.1",
     "tw-animate-css": "^1.3.4",
